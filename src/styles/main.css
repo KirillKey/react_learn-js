@@ -1,0 +1,19 @@
+.App {
+  padding: 0px 4%;
+  margin-top: 20px;
+}
+
+.Post {
+  /* margin-top: 20px; */
+}
+
+.post {
+margin-top: 20px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+/* flex-direction: column; */
+border: 2px blueviolet solid;
+padding: 8px 2px;
+}
+
