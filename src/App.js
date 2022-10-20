@@ -7,8 +7,10 @@ import PostItem from "./components/PostItem";
 import PostList from "./components/PostList";
 import MyButton from "./components/UI/button/MyButton";
 import MyInput from "./components/UI/input/MyInput";
+import PostForm from "./components/postForm";
+import MySelect from "./components/UI/select/MySelect";
 
-// 58 минута
+// ЧАС/МИНУТА : 12 - минута
 
 function App() {
   const [posts, setPosts] = useState([
@@ -16,35 +18,47 @@ function App() {
     // { id: 2, title: "Javascript", body: "Description" },
     // { id: 3, title: "Javascript", body: "Description" },
   ]);
-  const [post, setPost] = useState({ title: "", body: "", });
+  const [selectedSort, setSelectedSort] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  function addNewPost(e) {
-    e.preventDefault();
-    setPosts([...posts, { ...post, id: Date.now() }]);
-    setPost({ title: "", body: "", });
+  const createPost = (newPost) => {
+    setPosts([...posts, newPost])
+  };
+
+  const removePost = (post) => {
+    setPosts(posts.filter(p => p.id !== post.id))
+  };
+
+  const sortPosts = (sort) => {
+    setSelectedSort(sort);
+    setPosts([...posts].sort((a, b) => a[sort].localeCompare(b[sort])))
   }
 
   return (
     <div className="App">
-      <form>
-        <MyInput type="text"
-          onChange={e => setPost({ ...post, title: e.target.value })}
-          value={post.title}
-          placeholder="Название поста" />
-        {/* НЕ управляемый компонент */}
-        {/* <MyInput type="text"
-          placeholder="Описание поста"
-          ref={bodyInputRef}
-        /> */}
-        <MyInput type="text"
-          onChange={e => setPost({ ...post, body: e.target.value })}
-          value={post.body}
-          placeholder="Описание поста" />
-        <MyButton onClick={addNewPost}>Создать пост</MyButton>
-      </form>
-      <div className="Post">
-        <PostList posts={posts} title="Посты по JS" />
+      <PostForm create={createPost} />
+      <hr style={{ margin: '15px 0' }} />
+      <div>
+        <MyInput
+          value={searchQuery}
+          onChange={e => setSearchQuery(e.target.value)}
+          placeholder={'Поиск...'}
+        />
+        <MySelect
+          value={selectedSort}
+          onChange={sortPosts}
+          defaultValue="Сортировка"
+          options={[
+            { value: 'title', name: 'По заголовку' },
+            { value: 'body', name: 'По описанию' }
+          ]}
+        />
       </div>
+      {posts.length !== 0
+        ? <PostList remove={removePost} posts={posts} title="Посты по JS" />
+        : <h2 style={{ textAlign: 'center' }}>Посты не найдены!</h2>
+      }
+
     </div>
   );
 }
