@@ -1,3 +1,17 @@
+
+# Учебный мини-проект по React.JS
+## [Перейти на сайт](https://react-learn-js.vercel.app) 👈
+## Описание:
+Посты с двумя строчками (название и описание поста), с функцией их добавления и удаления.
+
+### ⚙ Стек технологий:
+- React.JS
+- Vanilla Css and React Css.module
+
+#### 📑 [Мой сертификат Веб-разработчика](https://loftschool.com/diploma/NPR54032AC542XBZ4/ru/pdf)
+###### (Онлайн-школа [Loftschool](https://loftschool.com))
+
+____
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
